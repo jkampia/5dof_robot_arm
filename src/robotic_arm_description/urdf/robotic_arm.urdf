@@ -1,0 +1,155 @@
+<robot name="robotic_arm">
+
+  <!-- Blue color for base_link -->
+  <material name="blue">
+  <color rgba="0.0 0.0 1.0 1.0"/> <!-- Blue color -->
+  </material>
+
+  <!-- Green color for link1 -->
+  <material name="green">
+  <color rgba="0.0 1.0 0.0 1.0"/> <!-- Green color -->
+  </material>
+
+  <!-- Red color for link2 -->
+  <material name="red">
+  <color rgba="1.0 0.0 0.0 1.0"/> <!-- Red color -->
+  </material>
+
+  <!-- Yellow color for link3 -->
+  <material name="yellow">
+  <color rgba="1.0 1.0 0.0 1.0"/> <!-- Yellow color -->
+  </material>
+
+  <!-- Cyan color for link4 -->
+  <material name="cyan">
+  <color rgba="0.0 1.0 1.0 1.0"/> <!-- Cyan color -->
+  </material>
+
+  <!-- Magenta color for link5 -->
+  <material name="magenta">
+  <color rgba="1.0 0.0 1.0 1.0"/> <!-- Magenta color -->
+  </material>
+
+  <!-- Black color for gripper -->
+  <material name="black">
+  <color rgba="0.0 0.0 0.0 1.0"/> <!-- Black color -->
+  </material>
+
+  <!-- White color for some parts (if needed) -->
+  <material name="white">
+  <color rgba="1.0 1.0 1.0 1.0"/> <!-- White color -->
+  </material>
+
+  <!-- Gray color for neutral parts -->
+  <material name="gray">
+  <color rgba="0.5 0.5 0.5 1.0"/> <!-- Gray color -->
+  </material>
+
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.2" length="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+  <!-- 1) Waist Rotation -->
+  <joint name="waist_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="waist_link"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/>
+  </joint>
+
+  <link name="waist_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.5"/>
+      </geometry>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <!-- 2) Shoulder Rotation -->
+  <joint name="shoulder_joint" type="revolute">
+    <parent link="waist_link"/>
+    <child link="shoulder_link"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="100" velocity="1.0"/>
+  </joint>
+
+  <link name="shoulder_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.1 0.5"/>
+      </geometry>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <!-- 3) Elbow Rotation -->
+  <joint name="elbow_joint" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="elbow_link"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="100" velocity="1.0"/>
+  </joint>
+
+  <link name="elbow_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.1 0.4"/>
+      </geometry>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <material name="yellow"/>
+    </visual>
+  </link>
+
+  <!-- 4) Wrist Rotation -->
+  <joint name="wrist_joint" type="revolute">
+    <parent link="elbow_link"/>
+    <child link="wrist_link"/>
+    <origin xyz="0 0 0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="50" velocity="1.0"/>
+  </joint>
+
+  <link name="wrist_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.2"/>
+      </geometry>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <!-- 5) Gripper Rotation -->
+  <joint name="gripper_joint" type="revolute">
+    <parent link="wrist_link"/>
+    <child link="gripper_link"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="50" velocity="1.0"/>
+  </joint>
+
+  <link name="gripper_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.2"/>
+      </geometry>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <material name="cyan"/>
+    </visual>
+  </link>
+</robot>
+

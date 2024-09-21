@@ -1,0 +1,5 @@
+# Ignore ws build install and log directories
+
+build
+install
+log
